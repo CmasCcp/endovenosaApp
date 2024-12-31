@@ -1,28 +1,29 @@
-// components/Layout.js
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView } from 'react-native';
 
 export default function Layout({ children }) {
   return (
+    <ScrollView>
     <View style={styles.container}>
       {/* Encabezado */}
       <View style={styles.header}>
         <Image
-            source={require('../assets/logo.png')} // Ruta relativa a la carpeta del archivo
-            style={styles.image} // Aplica estilos para controlar el tamaño
+          source={require('../assets/logo.png')} // Ruta relativa a la carpeta del archivo
+          style={styles.image} // Aplica estilos para controlar el tamaño
         />
       </View>
 
-      {/* Contenido dinámico */}
-      <View style={styles.content}>
+      {/* Contenido dinámico desplazable */}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
         {children}
-      </View>
+      </ScrollView>
 
       {/* Pie de página */}
       <View style={styles.footer}>
         <Text style={styles.footerText}>My App Footer</Text>
       </View>
     </View>
+    </ScrollView>
   );
 }
 
@@ -41,9 +42,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  content: {
-    flex: 1,
+  scrollContent: {
+    flexGrow: 1, // Asegura que el contenido use el espacio restante
     padding: 10,
+    vertical:"true",
   },
   footer: {
     height: 50,
