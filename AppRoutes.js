@@ -4,10 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './pages/HomeScreen';
 import Layout from './layout/Layout'; // Importa el layout
+import DashboardScreen from './pages/DashboardScreen';
 
 const Stack = createStackNavigator();
 
 export default function AppRoutes() {
+  const propiedades = {title:"titulo", body:"titulo", style:"danger", alertType:"danger"}
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -15,6 +17,13 @@ export default function AppRoutes() {
           {(props) => (
             <Layout>
               <HomeScreen {...props} />
+            </Layout>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Device">
+          {(propiedades) => (
+            <Layout>
+              <DashboardScreen propiedades  {...propiedades}/>
             </Layout>
           )}
         </Stack.Screen>
