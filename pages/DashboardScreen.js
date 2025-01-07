@@ -54,8 +54,9 @@ const DashboardScreen = () => {
       {loading && <ActivityIndicator size="large" color="#0000ff" />}
 
       {deviceData1.alertMsg && (
-        <View style={styles.fullWidth}>
-          <Card title="Alerta" body={deviceData1.alertMsg} alertType={deviceData1.alertType} />
+        <View style={[styles.fullWidth, styles.textWhite]}>
+          <Card title="Alerta"
+            body={deviceData1.alertMsg} alertType={deviceData1.alertType} />
         </View>
       )}
 
@@ -64,7 +65,7 @@ const DashboardScreen = () => {
           <Card title="Patente" body={deviceData1.license} />
           <Card title="Inicio programado" body={deviceData1.lastConnection} />
 
-          <View style={[styles.row, isSmallScreen && styles.column]}>
+          <View style={styles.row}>
             <Card style={styles.col}
               title="Tiempo en sesión"
               body={
@@ -74,6 +75,7 @@ const DashboardScreen = () => {
                 </>
               }
             />
+
             <Card style={styles.col}
               title="Flujo actual"
               body={
@@ -83,10 +85,12 @@ const DashboardScreen = () => {
                 </>
               }
             />
+
           </View>
         </View>
-        <View style={[styles.col4, isSmallScreen && styles.fullWidth]}>
-          <Card title="Estado" body={deviceData1.status} />
+        <View style={styles.col4}>
+          <Card title="Estado" style={styles.estado} body={deviceData1.status} />
+
           <Card body={bodyCardDoble} />
         </View>
       </View>
@@ -110,6 +114,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   column: {
+    marginVertical: 8,
     flexDirection: 'column',
   },
   col: {
@@ -125,25 +130,31 @@ const styles = StyleSheet.create({
   },
   fullWidth: {
     width: '100%',
-    marginBottom: 16,
+    marginBottom: 8,
   },
   label: {
-    fontSize: 12,
+    // fontSize: "12px",
     fontWeight: 'bold',
   },
   value: {
-    fontSize: 12,
+    // fontSize: "12px",
     fontWeight: 'bold',
     color: '#333',
   },
   unit: {
-    fontSize: 12,
+    // fontSize: "12px",
     color: '#666',
   },
   largeUnit: {
-    fontSize: 18,
+    // fontSize: "12px",
     color: '#666',
   },
+  textWhite:{
+    color: "#fff"
+  },
+  estado:{
+    flex: 2,
+  }
 });
 
 export default DashboardScreen;

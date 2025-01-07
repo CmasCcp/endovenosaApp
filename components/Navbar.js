@@ -26,44 +26,64 @@ const Navbar = () => {
   }, []);
 
   return (
-    <View style={styles.navbar}>
-      {/* Logo */}
-      <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo} />
-      </TouchableOpacity>
-
-      {/* Menú */}
-      {isSmallScreen ? (
-        <TouchableOpacity
-          onPress={() => setMenuVisible(!menuVisible)}
-          style={styles.hamburgerIcon}
-        >
-          <Ionicons name="menu" size={24} color="#333" />
+    <View style={styles.navbarContainer}>
+      <View style={styles.navbar}>
+        {/* Logo */}
+        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo} />
         </TouchableOpacity>
-      ) : (
-        <View style={styles.menu}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.menuItem}>
-            <Text style={styles.menuText}>INICIO</Text>
+
+        {/* Menú */}
+        {isSmallScreen ? (
+          <TouchableOpacity
+            onPress={() => setMenuVisible(!menuVisible)}
+            style={styles.hamburgerIcon}
+          >
+            <Ionicons name="menu" size={24} color="#333" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Device')} style={styles.menuItem}>
-            <Text style={styles.menuText}>DASHBOARD</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('MyAccount')} style={styles.menuItem}>
-            <Text style={styles.menuText}>MI CUENTA</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+        ) : (
+          <View style={styles.menu}>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.menuItem}>
+              <Text style={styles.menuText}>INICIO</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Device')} style={styles.menuItem}>
+              <Text style={styles.menuText}>DASHBOARD</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('MyAccount')} style={styles.menuItem}>
+              <Text style={styles.menuText}>MI CUENTA</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
 
       {/* Menú desplegable para pantallas pequeñas */}
       {menuVisible && (
         <View style={styles.dropdownMenu}>
-          <TouchableOpacity onPress={() => { setMenuVisible(false); navigation.navigate('Home'); }} style={styles.menuItem}>
+          <TouchableOpacity
+            onPress={() => {
+              setMenuVisible(false);
+              navigation.navigate('Home');
+            }}
+            style={styles.menuItem}
+          >
             <Text style={styles.menuText}>INICIO</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setMenuVisible(false); navigation.navigate('Device'); }} style={styles.menuItem}>
+          <TouchableOpacity
+            onPress={() => {
+              setMenuVisible(false);
+              navigation.navigate('Device');
+            }}
+            style={styles.menuItem}
+          >
             <Text style={styles.menuText}>DASHBOARD</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { setMenuVisible(false); navigation.navigate('MyAccount'); }} style={styles.menuItem}>
+          <TouchableOpacity
+            onPress={() => {
+              setMenuVisible(false);
+              navigation.navigate('MyAccount');
+            }}
+            style={styles.menuItem}
+          >
             <Text style={styles.menuText}>MI CUENTA</Text>
           </TouchableOpacity>
         </View>
@@ -73,6 +93,10 @@ const Navbar = () => {
 };
 
 const styles = StyleSheet.create({
+  navbarContainer: {
+    position: 'relative', // Posiciona el navbar relativo a la pantalla
+    zIndex: 10, // Asegúrate de que el navbar tenga prioridad sobre otros elementos
+  },
   navbar: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -86,7 +110,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    position: 'relative',
+    zIndex: 10, // Prioridad sobre otros elementos
   },
   logoContainer: {
     padding: 8,
@@ -114,8 +138,8 @@ const styles = StyleSheet.create({
   },
   dropdownMenu: {
     position: 'absolute',
-    top: 60, // Ajustar según la altura del navbar
-    right: 16,
+    top: '100%', // Colocar el menú justo debajo del navbar
+    right: 0,
     backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: '#ddd',
@@ -124,7 +148,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    zIndex: 10, // Asegúrate de que el menú se muestre encima
+    zIndex: 20, // Asegúrate de que el menú desplegable tenga prioridad
   },
 });
 

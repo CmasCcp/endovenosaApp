@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, ScrollView } from 'react-native';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function Layout({ children }) {
   return (
@@ -21,9 +22,11 @@ export default function Layout({ children }) {
         </ScrollView>
 
         {/* Pie de página */}
-        <View style={styles.footer}>
+        {/* <View style={styles.footer}>
           <Text style={styles.footerText}>My App Footer</Text>
-        </View>
+        </View> */}
+
+        <Footer/>
       </View>
     </ScrollView>
   );
