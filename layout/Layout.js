@@ -1,17 +1,19 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, ScrollView } from 'react-native';
+import Navbar from '../components/Navbar';
 
 export default function Layout({ children }) {
   return (
     <ScrollView>
       <View style={styles.container}>
         {/* Encabezado */}
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <Image
             source={require('../assets/logo.png')} // Ruta relativa a la carpeta del archivo
             style={styles.image} // Aplica estilos para controlar el tamaño
           />
-        </View>
+        </View> */}
+        <Navbar/>
 
         {/* Contenido dinámico desplazable */}
         <ScrollView contentContainerStyle={styles.scrollContent}>

@@ -21,9 +21,9 @@ export default function AppRoutes() {
           )}
         </Stack.Screen>
         <Stack.Screen name="Device">
-          {(propiedades) => (
+          {(props) => (
             <Layout>
-              <DashboardScreen propiedades  {...propiedades}/>
+              <DashboardScreen {...props}  {...propiedades}/>
             </Layout>
           )}
         </Stack.Screen>

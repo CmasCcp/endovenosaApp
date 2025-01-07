@@ -1,26 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Dimensions } from 'react-native';
 import Card from '../components/Card'; // Suponiendo que tienes un componente Card reutilizable en React Native
 import axios from 'axios';
-
-const bodyCardDoble = (
-  <View style={styles.row}>
-    <View style={styles.col}>
-      <Text style={styles.label}>Suministrado</Text>
-      <Text style={styles.value}>60</Text>
-      <Text style={styles.unit}>mL</Text>
-    </View>
-    <View style={styles.col}>
-      <Text style={styles.label}>Total</Text>
-      <Text style={styles.value}>1000</Text>
-      <Text style={styles.unit}>mL</Text>
-    </View>
-  </View>
-);
 
 const DashboardScreen = () => {
   const [deviceData1, setDeviceData1] = useState({});
   const [loading, setLoading] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // Leer datos (GET)
   useEffect(() => {
@@ -32,6 +18,37 @@ const DashboardScreen = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  // Detectar cambios en el ancho de la pantalla
+  useEffect(() => {
+    const updateLayout = () => {
+      const screenWidth = Dimensions.get('window').width;
+      setIsSmallScreen(screenWidth < 600); // Si el ancho es menor a 600px, cambia el estado
+    };
+
+    updateLayout(); // Detecta en el montaje
+    Dimensions.addEventListener('change', updateLayout); // Detecta cambios en tiempo real
+
+    // Limpieza del evento cuando el componente se desmonta
+    return () => {
+      Dimensions.removeEventListener('change', updateLayout);
+    };
+  }, []);
+
+  const bodyCardDoble = (
+    <View style={styles.row}>
+      <View style={styles.col}>
+        <Text style={styles.label}>Suministrado</Text>
+        <Text style={styles.value}>60</Text>
+        <Text style={styles.unit}>mL</Text>
+      </View>
+      <View style={styles.col}>
+        <Text style={styles.label}>Total</Text>
+        <Text style={styles.value}>1000</Text>
+        <Text style={styles.unit}>mL</Text>
+      </View>
+    </View>
+  );
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {loading && <ActivityIndicator size="large" color="#0000ff" />}
@@ -42,13 +59,13 @@ const DashboardScreen = () => {
         </View>
       )}
 
-      <View style={styles.mainContent}>
-        <View style={styles.col8}>
+      <View style={[styles.mainContent, isSmallScreen && styles.column]}>
+        <View style={[styles.col8, isSmallScreen && styles.fullWidth]}>
           <Card title="Patente" body={deviceData1.license} />
           <Card title="Inicio programado" body={deviceData1.lastConnection} />
 
-          <View style={styles.row}>
-            <Card
+          <View style={[styles.row, isSmallScreen && styles.column]}>
+            <Card style={styles.col}
               title="Tiempo en sesión"
               body={
                 <>
@@ -57,7 +74,7 @@ const DashboardScreen = () => {
                 </>
               }
             />
-            <Card
+            <Card style={styles.col}
               title="Flujo actual"
               body={
                 <>
@@ -68,7 +85,7 @@ const DashboardScreen = () => {
             />
           </View>
         </View>
-        <View style={styles.col4}>
+        <View style={[styles.col4, isSmallScreen && styles.fullWidth]}>
           <Card title="Estado" body={deviceData1.status} />
           <Card body={bodyCardDoble} />
         </View>
@@ -92,12 +109,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 8,
   },
+  column: {
+    flexDirection: 'column',
+  },
   col: {
     flex: 1,
     alignItems: 'center',
   },
   col8: {
-    flex: 2,
+    flex: 1,
     marginRight: 8,
   },
   col4: {
@@ -108,16 +128,16 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
   },
   value: {
-    fontSize: 24,
+    fontSize: 12,
     fontWeight: 'bold',
     color: '#333',
   },
   unit: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#666',
   },
   largeUnit: {
