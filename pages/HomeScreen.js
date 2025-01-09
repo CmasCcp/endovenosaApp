@@ -12,9 +12,10 @@ export default function HomeScreen({ navigation }) {
         status: "Transmitting",
         lastConnection: "07/10/2024"
     };
-
+    
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
+
             <AddDeviceCard                 
                 Title={'dispositivo'} 
                 Body={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae massa id dolor porttitor interdum eu id lectus. Cras'}

@@ -9,21 +9,21 @@ import DashboardScreen from './pages/DashboardScreen';
 const Stack = createStackNavigator();
 
 export default function AppRoutes() {
-  const propiedades = {title:"titulo", body:"titulo", style:"danger", alertType:"danger"}
+  const dashboardProps = {title:"titulo", body:"titulo", style:"danger", alertType:"danger"};
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home">
+        <Stack.Screen name="home">
           {(props) => (
             <Layout>
               <HomeScreen {...props} />
             </Layout>
           )}
         </Stack.Screen>
-        <Stack.Screen name="Device">
-          {(propiedades) => (
+        <Stack.Screen name="device">
+          {(props) => (
             <Layout>
-              <DashboardScreen propiedades  {...propiedades}/>
+              <DashboardScreen {...dashboardProps}  {...props}/>
             </Layout>
           )}
         </Stack.Screen>

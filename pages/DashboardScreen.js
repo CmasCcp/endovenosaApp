@@ -3,22 +3,22 @@ import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-nat
 import Card from '../components/Card'; // Suponiendo que tienes un componente Card reutilizable en React Native
 import axios from 'axios';
 
-const bodyCardDoble = (
-  <View style={styles.row}>
-    <View style={styles.col}>
-      <Text style={styles.label}>Suministrado</Text>
-      <Text style={styles.value}>60</Text>
-      <Text style={styles.unit}>mL</Text>
-    </View>
-    <View style={styles.col}>
-      <Text style={styles.label}>Total</Text>
-      <Text style={styles.value}>1000</Text>
-      <Text style={styles.unit}>mL</Text>
-    </View>
-  </View>
-);
 
-const DashboardScreen = () => {
+const DashboardScreen = ({ title, body, style, alertType }) => {
+  const bodyCardDoble = (
+    <View style={styles.row}>
+      <View style={styles.col}>
+        <Text style={styles.label}>Suministrado</Text>
+        <Text style={styles.value}>60</Text>
+        <Text style={styles.unit}>mL</Text>
+      </View>
+      <View style={styles.col}>
+        <Text style={styles.label}>Total</Text>
+        <Text style={styles.value}>1000</Text>
+        <Text style={styles.unit}>mL</Text>
+      </View>
+    </View>
+  );
   const [deviceData1, setDeviceData1] = useState({});
   const [loading, setLoading] = useState(false);
 
