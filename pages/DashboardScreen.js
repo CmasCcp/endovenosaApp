@@ -1,10 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Dimensions } from 'react-native';
 import Card from '../components/Card'; // Suponiendo que tienes un componente Card reutilizable en React Native
 import axios from 'axios';
 
+const DashboardScreen = () => {
+  const [deviceData1, setDeviceData1] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-const DashboardScreen = ({ title, body, style, alertType }) => {
+  // Leer datos (GET)
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get('https://api-sensores.cmasccp.cl/endovenosaDummy')
+      .then((response) => setDeviceData1(response.data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Detectar cambios en el ancho de la pantalla
+  useEffect(() => {
+    const updateLayout = () => {
+      const screenWidth = Dimensions.get('window').width;
+      setIsSmallScreen(screenWidth < 600); // Si el ancho es menor a 600px, cambia el estado
+    };
+
+    updateLayout(); // Detecta en el montaje
+    Dimensions.addEventListener('change', updateLayout); // Detecta cambios en tiempo real
+
+    // Limpieza del evento cuando el componente se desmonta
+    return () => {
+      Dimensions.removeEventListener('change', updateLayout);
+    };
+  }, []);
+
   const bodyCardDoble = (
     <View style={styles.row}>
       <View style={styles.col}>
@@ -19,36 +48,25 @@ const DashboardScreen = ({ title, body, style, alertType }) => {
       </View>
     </View>
   );
-  const [deviceData1, setDeviceData1] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  // Leer datos (GET)
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get('https://api-sensores.cmasccp.cl/endovenosaDummy')
-      .then((response) => setDeviceData1(response.data))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {loading && <ActivityIndicator size="large" color="#0000ff" />}
 
       {deviceData1.alertMsg && (
-        <View style={styles.fullWidth}>
-          <Card title="Alerta" body={deviceData1.alertMsg} alertType={deviceData1.alertType} />
+        <View style={[styles.fullWidth, styles.textWhite]}>
+          <Card title="Alerta"
+            body={deviceData1.alertMsg} alertType={deviceData1.alertType} />
         </View>
       )}
 
-      <View style={styles.mainContent}>
-        <View style={styles.col8}>
+      <View style={[styles.mainContent, isSmallScreen && styles.column]}>
+        <View style={[styles.col8, isSmallScreen && styles.fullWidth]}>
           <Card title="Patente" body={deviceData1.license} />
           <Card title="Inicio programado" body={deviceData1.lastConnection} />
 
           <View style={styles.row}>
-            <Card
+            <Card style={styles.col}
               title="Tiempo en sesión"
               body={
                 <>
@@ -57,7 +75,8 @@ const DashboardScreen = ({ title, body, style, alertType }) => {
                 </>
               }
             />
-            <Card
+
+            <Card style={styles.col}
               title="Flujo actual"
               body={
                 <>
@@ -66,10 +85,12 @@ const DashboardScreen = ({ title, body, style, alertType }) => {
                 </>
               }
             />
+
           </View>
         </View>
         <View style={styles.col4}>
-          <Card title="Estado" body={deviceData1.status} />
+          <Card title="Estado" style={styles.estado} body={deviceData1.status} />
+
           <Card body={bodyCardDoble} />
         </View>
       </View>
@@ -92,12 +113,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 8,
   },
+  column: {
+    marginVertical: 8,
+    flexDirection: 'column',
+  },
   col: {
     flex: 1,
     alignItems: 'center',
   },
   col8: {
-    flex: 2,
+    flex: 1,
     marginRight: 8,
   },
   col4: {
@@ -105,25 +130,31 @@ const styles = StyleSheet.create({
   },
   fullWidth: {
     width: '100%',
-    marginBottom: 16,
+    marginBottom: 8,
   },
   label: {
-    fontSize: 16,
+    // fontSize: "12px",
     fontWeight: 'bold',
   },
   value: {
-    fontSize: 24,
+    // fontSize: "12px",
     fontWeight: 'bold',
     color: '#333',
   },
   unit: {
-    fontSize: 14,
+    // fontSize: "12px",
     color: '#666',
   },
   largeUnit: {
-    fontSize: 18,
+    // fontSize: "12px",
     color: '#666',
   },
+  textWhite:{
+    color: "#fff"
+  },
+  estado:{
+    flex: 2,
+  }
 });
 
 export default DashboardScreen;
