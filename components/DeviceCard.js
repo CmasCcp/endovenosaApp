@@ -66,6 +66,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
+  margin:{
+    margin: 12,
+  },
+  
+  marginBottom:{
+    marginBottom: 12,
+  },
+  marginTop:{
+    marginTop: 12,
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',

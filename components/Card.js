@@ -35,7 +35,8 @@ const Card = ({ title, body, style, alertType }) => {
 const styles = StyleSheet.create({
   card: {
     padding: 16,
-    margin: 16,
+    marginBottom: 16,
+    marginHorizontal: 16,
     borderRadius: 12,
     backgroundColor: '#fff',
     shadowColor: '#000',

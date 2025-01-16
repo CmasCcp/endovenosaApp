@@ -9,7 +9,7 @@ import DashboardScreen from './pages/DashboardScreen';
 const Stack = createStackNavigator();
 
 export default function AppRoutes() {
-  const dashboardProps = {title:"titulo", body:"titulo", style:"danger", alertType:"danger"};
+  const propiedades = {title:"titulo", body:"titulo", style:"danger", alertType:"danger"};
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>

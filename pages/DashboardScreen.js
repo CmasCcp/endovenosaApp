@@ -61,7 +61,7 @@ const DashboardScreen = () => {
       )}
 
       <View style={[styles.mainContent, isSmallScreen && styles.column]}>
-        <View style={[styles.col8, isSmallScreen && styles.fullWidth]}>
+        <View style={[styles.col6, isSmallScreen && styles.fullWidth]}>
           <Card title="Patente" body={deviceData1.license} />
           <Card title="Inicio programado" body={deviceData1.lastConnection} />
 
@@ -88,10 +88,10 @@ const DashboardScreen = () => {
 
           </View>
         </View>
-        <View style={styles.col4}>
+        <View style={[styles.col6, isSmallScreen && styles.marginTop]}>
           <Card title="Estado" style={styles.estado} body={deviceData1.status} />
 
-          <Card body={bodyCardDoble} />
+          <Card body={bodyCardDoble} style={styles.cardDoble}/>
         </View>
       </View>
     </ScrollView>
@@ -103,10 +103,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 16,
     backgroundColor: '#f5f5f5',
+    flexShrink:"unset",
+
   },
   mainContent: {
+    display:"flex",
     flexDirection: 'row',
     flexWrap: 'wrap',
+    flexShrink:"unset",
+    
   },
   row: {
     flexDirection: 'row',
@@ -115,18 +120,36 @@ const styles = StyleSheet.create({
   },
   column: {
     marginVertical: 8,
+    display:"flex",
+    flexWrap: 'wrap',
     flexDirection: 'column',
+    justifyContent:"center",
+    flexShrink:"unset",
+
   },
   col: {
     flex: 1,
     alignItems: 'center',
+    flexShrink:"unset",
   },
   col8: {
     flex: 1,
+    flexShrink:"unset",
     marginRight: 8,
   },
-  col4: {
+  col6: {
+    display:"flex",
     flex: 1,
+    flexDirection: "column",
+    flexShrink:"unset",
+  },
+  col4: {
+    display:"flex",
+    flex: 1,
+    flexDirection: "column",
+  },
+  marginTop:{
+    marginTop: 32,
   },
   fullWidth: {
     width: '100%',
@@ -154,6 +177,9 @@ const styles = StyleSheet.create({
   },
   estado:{
     flex: 2,
+  },
+  cardDoble:{
+    flex:1,
   }
 });
 
