@@ -5,26 +5,15 @@ import Footer from '../components/Footer';
 
 export default function Layout({ children }) {
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.unset}>
       <View style={styles.container}>
         {/* Encabezado */}
-        {/* <View style={styles.header}>
-          <Image
-            source={require('../assets/logo.png')} // Ruta relativa a la carpeta del archivo
-            style={styles.image} // Aplica estilos para controlar el tamaño
-          />
-        </View> */}
         <Navbar/>
 
         {/* Contenido dinámico desplazable */}
         <ScrollView contentContainerStyle={styles.scrollContent}>
           {children}
         </ScrollView>
-
-        {/* Pie de página */}
-        {/* <View style={styles.footer}>
-          <Text style={styles.footerText}>My App Footer</Text>
-        </View> */}
 
         <Footer/>
       </View>
@@ -35,6 +24,11 @@ export default function Layout({ children }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
+  },
+  unset: {
+    flexShrink:"unset",
+
   },
   header: {
     height: 60,
