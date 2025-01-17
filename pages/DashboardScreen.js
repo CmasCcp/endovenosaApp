@@ -35,7 +35,7 @@ const DashboardScreen = () => {
   }, []);
 
   const bodyCardDoble = (
-    <View style={styles.row}>
+    <View style={[styles.row, styles.fullWidth]}>
       <View style={styles.col}>
         <Text style={styles.label}>Suministrado</Text>
         <Text style={styles.value}>60</Text>
@@ -60,23 +60,23 @@ const DashboardScreen = () => {
         </View>
       )}
 
-      <View style={[styles.mainContent, isSmallScreen && styles.column]}>
-        <View style={[styles.col6, isSmallScreen && styles.fullWidth]}>
-          <Card title="Patente" body={deviceData1.license} />
-          <Card title="Inicio programado" body={deviceData1.lastConnection} />
+      <View style={[styles.mainContent, isSmallScreen && styles.col]}>
+        <View style={[styles.col, isSmallScreen && styles.fullWidth]}>
+          <Card title="Patente" style={[styles.patente]} body={deviceData1.license} />
+          <Card title="Inicio programado" style={[styles.inicio]} body={deviceData1.lastConnection} />
 
-          <View style={styles.row}>
-            <Card style={styles.col}
+          <View style={[styles.row, styles.tiempo]}>
+            <Card style={[styles.col, styles.marginRight]}
               title="Tiempo en sesión"
               body={
-                <>
+                <View style={styles.col}>
                   <Text style={styles.value}>15</Text>
                   <Text style={styles.largeUnit}>Minutos</Text>
-                </>
+                </View>
               }
             />
 
-            <Card style={styles.col}
+            <Card style={[styles.col, styles.marginLeft]}
               title="Flujo actual"
               body={
                 <>
@@ -88,10 +88,10 @@ const DashboardScreen = () => {
 
           </View>
         </View>
-        <View style={[styles.col6, isSmallScreen && styles.marginTop]}>
+        <View style={[styles.col, isSmallScreen && styles.marginTop]}>
           <Card title="Estado" style={styles.estado} body={deviceData1.status} />
 
-          <Card body={bodyCardDoble} style={styles.cardDoble}/>
+          <Card body={bodyCardDoble} style={[styles.cardDoble, styles.fullWidth]}/>
         </View>
       </View>
     </ScrollView>
@@ -100,86 +100,69 @@ const DashboardScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     padding: 16,
     backgroundColor: '#f5f5f5',
-    flexShrink:"unset",
-
+  },
+  row: {
+    flexDirection: 'row',
+    marginVertical: 0,
+  },
+  col: {
+    display:"flex",
+    flex: 1,
+    flexDirection: "column",
   },
   mainContent: {
     display:"flex",
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    flexShrink:"unset",
-    
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 8,
-  },
-  column: {
-    marginVertical: 8,
-    display:"flex",
-    flexWrap: 'wrap',
-    flexDirection: 'column',
-    justifyContent:"center",
-    flexShrink:"unset",
-
-  },
-  col: {
-    flex: 1,
-    alignItems: 'center',
-    flexShrink:"unset",
-  },
-  col8: {
-    flex: 1,
-    flexShrink:"unset",
-    marginRight: 8,
-  },
-  col6: {
-    display:"flex",
-    flex: 1,
-    flexDirection: "column",
-    flexShrink:"unset",
-  },
-  col4: {
-    display:"flex",
-    flex: 1,
-    flexDirection: "column",
   },
   marginTop:{
-    marginTop: 32,
+    marginTop: 0,
+  },
+  marginRight:{
+    marginRight: 5,
+  },
+  marginLeft:{
+    marginLeft: 5,
   },
   fullWidth: {
     width: '100%',
-    marginBottom: 8,
+    // marginBottom: 8,
   },
   label: {
-    // fontSize: "12px",
+    fontSize: "0.7rem",
     fontWeight: 'bold',
   },
   value: {
-    // fontSize: "12px",
+    fontSize: "0.7rem",
     fontWeight: 'bold',
     color: '#333',
   },
   unit: {
-    // fontSize: "12px",
+    fontSize: "0.7rem",
     color: '#666',
   },
   largeUnit: {
-    // fontSize: "12px",
+    fontSize: "0.7rem",
     color: '#666',
   },
   textWhite:{
     color: "#fff"
   },
+  patente:{
+    flex: 3,
+  },
+  inicio:{
+    flex:3,
+  },
+  tiempoFlujo:{
+    flex:3,
+  },
   estado:{
-    flex: 2,
+    flex: 6,
   },
   cardDoble:{
-    flex:1,
+    flex:3,
   }
 });
 

@@ -25,8 +25,8 @@ const Card = ({ title, body, style, alertType }) => {
   return (
     <View style={[styles.card, typeStyles, style]}>
       {!!title && <Text style={styles.title}>{title}</Text>}
-      <View style={styles.bodyContainer}>
-        <Text style={styles.body}>{body}</Text>
+      <View style={[styles.bodyContainer]}>
+        <Text style={[styles.body, styles.fullWidth]}>{body}</Text>
       </View>
     </View>
   );
@@ -35,8 +35,8 @@ const Card = ({ title, body, style, alertType }) => {
 const styles = StyleSheet.create({
   card: {
     padding: 16,
-    marginBottom: 16,
-    marginHorizontal: 16,
+    marginBottom: 10,
+    marginHorizontal: 0,
     borderRadius: 12,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -44,9 +44,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5, // Sombra en Android
+    justifyContent:"center"
   },
   title: {
-    fontSize: 18,
+    fontSize: "0.7rem",
     marginBottom: 8,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   body: {
-    fontSize: 24,
+    fontSize: "0.7rem",
     textAlign: 'center',
   },
   // Estilos para los tipos de alerta
@@ -76,6 +77,10 @@ const styles = StyleSheet.create({
   info: {
     backgroundColor: '#17a2b8',
     color: '#fff',
+  },
+  fullWidth: {
+    width: '100%',
+    // marginBottom: 8,
   },
 });
 

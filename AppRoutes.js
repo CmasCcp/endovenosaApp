@@ -13,7 +13,7 @@ export default function AppRoutes() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="home">
+        <Stack.Screen name="Home">
           {(props) => (
             <Layout>
               <HomeScreen {...props} />
@@ -21,6 +21,13 @@ export default function AppRoutes() {
           )}
         </Stack.Screen>
         <Stack.Screen name="Device">
+          {(props) => (
+            <Layout>
+              <DashboardScreen {...props}  {...propiedades}/>
+            </Layout>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="MyAccount">
           {(props) => (
             <Layout>
               <DashboardScreen {...props}  {...propiedades}/>
