@@ -79,10 +79,10 @@ const DashboardScreen = () => {
             <Card style={[styles.col, styles.marginLeft]}
               title="Flujo actual"
               body={
-                <>
+                <View style={styles.col}>
                   <Text style={styles.value}>1000</Text>
                   <Text style={styles.largeUnit}>mL/Hr</Text>
-                </>
+                </View>
               }
             />
 
