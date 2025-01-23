@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Para navegar entre pantallas
+import { useNavigation } from '@react-navigation/native';
 import logo from '../assets/logo.png'; // Asegúrate de que el logo esté en la carpeta adecuada
 import { Ionicons } from '@expo/vector-icons'; // Asegúrate de instalar expo/vector-icons si usas Expo
 
 const Navbar = () => {
-  const navigation = useNavigation(); // Hook para manejar la navegación
+  const navigation = useNavigation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false); // Controla si el menú está desplegado
+  const [menuVisible, setMenuVisible] = useState(false);
 
   // Detectar el tamaño de la pantalla
   useEffect(() => {
@@ -16,12 +16,15 @@ const Navbar = () => {
       setIsSmallScreen(screenWidth < 600); // Cambiar a vista responsiva si la pantalla es pequeña
     };
 
-    updateLayout(); // Detectar en el montaje
-    Dimensions.addEventListener('change', updateLayout); // Detectar cambios en tiempo real
+    // Detectar dimensiones iniciales
+    updateLayout();
 
-    // Limpiar evento cuando el componente se desmonte
+    // Suscribirse a los cambios de dimensiones
+    const subscription = Dimensions.addEventListener('change', updateLayout);
+
+    // Limpiar la suscripción al desmontar el componente
     return () => {
-      Dimensions.removeEventListener('change', updateLayout);
+      subscription.remove();
     };
   }, []);
 

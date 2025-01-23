@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './pages/HomeScreen';
 import Layout from './layout/Layout'; // Importa el layout
 import DashboardScreen from './pages/DashboardScreen';
+import AccountScreen from './pages/AccountScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,7 +31,7 @@ export default function AppRoutes() {
         <Stack.Screen name="MyAccount">
           {(props) => (
             <Layout>
-              <DashboardScreen {...props}  {...propiedades}/>
+              <AccountScreen {...props}  {...propiedades}/>
             </Layout>
           )}
         </Stack.Screen>

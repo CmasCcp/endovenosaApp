@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    justifyContent:"center",
     marginVertical: 0,
   },
   col: {
@@ -130,20 +131,24 @@ const styles = StyleSheet.create({
     // marginBottom: 8,
   },
   label: {
-    fontSize: "0.7rem",
+    textAlign:"center",
+    fontSize: 16,
     fontWeight: 'bold',
   },
   value: {
-    fontSize: "0.7rem",
+    textAlign:"center",
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
   },
   unit: {
-    fontSize: "0.7rem",
+    textAlign:"center",
+    fontSize: 16,
     color: '#666',
   },
   largeUnit: {
-    fontSize: "0.7rem",
+    textAlign:"center",
+    fontSize: 16,
     color: '#666',
   },
   textWhite:{
@@ -163,6 +168,7 @@ const styles = StyleSheet.create({
   },
   cardDoble:{
     flex:3,
+    justifyContent:"center",
   }
 });
 

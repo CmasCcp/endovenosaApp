@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent:"center"
   },
   title: {
-    fontSize: "0.7rem",
+    fontSize: 16,
     marginBottom: 8,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   body: {
-    fontSize: "0.7rem",
+    fontSize: 16,
     textAlign: 'center',
   },
   // Estilos para los tipos de alerta
